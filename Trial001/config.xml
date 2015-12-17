@@ -12,6 +12,7 @@
    <author href="http://vistak.tk" email="sunil.sunxiil.choudhary@gmail.com">
       Sunil Choudhary
    </author>
+   <access origin="http://eapmc.com" subdomains="true" />
    
    <preference name="permissions" value="none"/>
    <plugin name="cordova-plugin-camera" spec="1.2.0" source="pgb" />
