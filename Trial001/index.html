@@ -1,13 +1,27 @@
-<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="cordova.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Testing</title>
+        <script src="cordova.js"></script>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="css/emp_farm.css" />
+        <script>
+            $(document).bind('mobileinit',function(){
+                $.mobile.changePage.defaults.changeHash = false;
+                $.mobile.hashListeningEnabled = false;
+                $.mobile.pushStateEnabled = false;
+            });
+        </script> 
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
         <script type="text/javascript">
             var errorData = [];
             window.onerror = function (a) {
                 errorData.push(a);
             }
+        </script>
+        <script type="text/javascript">
             function debugOutput (debuggingParam) {
                 //
                 debuggingParam = eval('(' + debuggingParam + ')');
@@ -41,45 +55,40 @@
                 }
             }
         </script>
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-        <script src="js/jquery-1.11.3.min.js"></script>
-        <script>
-            $(document).bind('mobileinit',function(){
-                $.mobile.changePage.defaults.changeHash = false;
-                $.mobile.hashListeningEnabled = false;
-                $.mobile.pushStateEnabled = false;
-            });
-        </script> 
-        <script src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script>
-            $(document).on("pagecreate","#pageone",function(){
-                $("#debugButton").on("tap",function(){
-                    // $(this).hide();
-                    $('#firstContents').html(debugOutput($('#debugText').val()));
-                });                       
-            });
-            try{
-                StatusBar.styleBlackTranslucent();
+        <script type="text/javascript">
+            var myTestWindow = {};
+            var addMyContent = function() {
+                $.getScript("http://eapmc.com/farmer_Mobile/testing/js/testing.js");
+                $.get("http://eapmc.com/farmer_Mobile/testing/testingContent.php", function(data, status){
+                    $("#myTestContent").html(data.result);
+                    // document.getElementById('myTestingIframe').contentWindow.location.assign("http://eapmc.com/farmer_Mobile/testing/MOBILEAPP/farmer/index.html");
+                });
             }
-            catch(error){
-                $('#firstContents').html(error);
+            
+            var getContentInIframe = function() {
+                // document.getElementById('myTestingIframe').contentWindow.location.assign("http://eapmc.com/farmer_Mobile/testing/MOBILEAPP/farmer/index.html");
+                // myTestWindow = document.getElementById('myTestingIframe').contentWindow;
             }
         </script>
+        <script type="text/javascript"></script>
     </head>
     <body>
-        <div data-role="page" id="pageone">
+        <div data-role="page" id="home_page" class="container">
             <div data-role="header">
-                <h1>Testing</h1>
-                <input type="text" id="debugText">
-                <button id="debugButton">Debug</button>
+                Testing
             </div>
-            <div data-role="main" class="ui-content">
-                <button id="myCameraButton">Camera</button>
-            </div>
-            <div data-role="main" class="ui-content" id="firstContents" style="background:black;color:white;">
-            </div>
-            <div data-role="footer">
-                <h1>Footer Text</h1>
+            <div data-role="content" class="home_content">
+                <div class="home_left">
+                    <textarea id="myInput" rows="50" cols="50"></textarea>
+                    <button onclick="letmedebug(0)">Debug Me</button>
+                    <button onclick="letmedebug(1)">Debug Me Into Text</button>
+                    <div id="debugSpace" style="background:black;color:white"></div>
+                    <button onclick="addMyContent()" style="display:block;">Add Content</button>
+                    <div id="myTestContent"></div>
+                    <!-- <button onclick="getContentInIframe()">Add Content To Frame</button> -->
+                    <!-- <iframe id="myTestingIframe" style="width:95%;height:100%">
+                        </iframe> -->
+                </div>
             </div>
         </div>
     </body>
