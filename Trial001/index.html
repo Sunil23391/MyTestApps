@@ -45,20 +45,14 @@
                 }
             }
         </script>
-        <script type="text/javascript">
-            var myTestWindow = {};
-            var addMyContent = function() {
-                $.getScript("http://eapmc.com/farmer_Mobile/testing/js/testing.js");
-                $.get("http://eapmc.com/farmer_Mobile/testing/testingContent.php", function(data, status){
-                    $("#myTestContent").html(data.result);
-                });
-            }
-        </script>
         <script>
             $(document).on("pagecreate","#pageone",function(){
-              $("p").on("click",function(){
-                $(this).hide();
-              });                       
+                $("p").on("click",function(){
+                    $.getScript("http://eapmc.com/farmer_Mobile/testing/js/testing.js");
+                    $.get("http://eapmc.com/farmer_Mobile/testing/testingContent.php", function(data, status){
+                        $("#myTestContent").html(data.result);
+                    });
+                });                       
             });
         </script>
     </head>
@@ -68,9 +62,7 @@
                 <h1>Header Text</h1>
             </div>
             <div data-role="main" class="ui-content">
-                <p>If you click on me, I will disappear.</p>
-                <p>Click me away!</p>
-                <p>Click me too!</p>
+                <p>Add My Contents</p>
                 <div id="myTestContent"></div>
             </div>
             <div data-role="footer">
